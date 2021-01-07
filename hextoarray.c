@@ -12,16 +12,16 @@ int main(int argc, char *argv[])
 	printf("*C_DEBUG: Program STARTED*\n");
 	if((cfptr_hex = fopen(argv[1],"r")) == NULL)
 	{
-		printf("*C_DEBUG: File could not be openned*\n");
+		printf("*C_DEBUG: .TXT FILE COULD NOT BE OPENNED|Created*\n");
 	}
 	else 
 	{
-		printf("*C_DEBUG: Hex File is Openned!!*\n");
+		printf("*C_DEBUG: HEX FILE IS OPENNED!!*\n");
 		if((cfptr_txt = fopen("OutputArray.txt","w")) == NULL)
 			{
 				printf("*C_DEBUG: Could not Create Txt file*\n");
 				fclose(cfptr_hex);
-				printf("C_DEBUG: HEX FILE IS CLOSED SUCCESSFULY!!!\n");
+				printf("*C_DEBUG: HEX FILE IS CLOSED SUCCESSFULY!!!*\n");
 			}
 		else
 		{	
@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 				byteCount_2 = fgetc(cfptr_hex) - '0';
 				recordDataSize = byteCount_1 + byteCount_2;
 				arrayByteCounter += recordDataSize;	
-				printf("C_DEBUG: DataSize in line = %d\n", recordDataSize);
+				//printf("C_DEBUG: DataSize in line = %d\n", recordDataSize);
 				if(recordDataSize != 0)
 				{	
 					/*Igonre the coming 6 address and record type bytes*/
@@ -64,7 +64,6 @@ int main(int argc, char *argv[])
 				}
 				else eof = 1;	
 			}
-			printf("HERE");
 			while(arrayByteCounter > PAGESIZE*NoOfPage)
 			{	
 				NoOfPage++;
@@ -85,7 +84,7 @@ int main(int argc, char *argv[])
 			fprintf(cfptr_txt,"%d\n",NoOfPage);
 			fclose(cfptr_txt);	
 			fclose(cfptr_hex);
-			printf("C_DEBUG: .TXT FILE IS CREATED SUCCESSFULY!!!\n");
+			printf("*C_DEBUG: .TXT FILE IS CREATED SUCCESSFULY!!!*\n");
 		}
 	}
 	return 0;
