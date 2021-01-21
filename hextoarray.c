@@ -38,8 +38,14 @@ int main(int argc, char *argv[])
 				printf("%d *\n", recordindex);
 				*/
 				/*Check Byte Count in Intel Hex Format:*/
-				byteCount_1 = (fgetc(cfptr_hex) - '0')*16;
-				byteCount_2 = fgetc(cfptr_hex) - '0';
+				byteCount_1 = fgetc(cfptr_hex);
+				if(byteCount_1 >= 'A') byteCount_1 = (byteCount_1 - 'A' + 10)*16;
+				else byteCount_1 = (byteCount_1 - '0')*16;
+				
+				byteCount_2 = fgetc(cfptr_hex);
+				if(byteCount_2 >= 'A') byteCount_2 = byteCount_2 - 'A' +10;
+				else byteCount_2 = byteCount_2 - '0';
+				
 				recordDataSize = byteCount_1 + byteCount_2;
 				arrayByteCounter += recordDataSize;	
 				//printf("C_DEBUG: DataSize in line = %d\n", recordDataSize);
